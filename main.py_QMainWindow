@@ -1,0 +1,25 @@
+## This is for QMainwindow
+
+
+from PySide.QtCore import *
+from PySide.QtGui import *
+
+import sys
+import directory
+
+from directory import Ui_MainWindow
+
+
+class User_MainWindow(QMainWindow, Ui_MainWindow):
+    def __init__(self, parent=None):
+        QMainWindow.__init__(self, parent)
+        #super(Dir_MainDialog, self).__init__(parent)
+        self.setupUi(self)
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    main = User_MainWindow()
+    main.show()
+    sys.exit(app.exec_())
+

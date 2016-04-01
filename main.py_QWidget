@@ -1,0 +1,59 @@
+## This is for QWidget
+
+
+from PySide.QtCore import *
+from PySide.QtGui import *
+
+import sys
+
+from Packet_gen import Ui_Packet_Gen
+from Generator
+
+class User_MainWidget(QWidget, Ui_Packet_Gen):
+    def __init__(self, parent=None):
+        QWidget.__init__(self, parent)
+        #super(User_MainWidget, self).__init__(parent)
+        self.setupUi(self)
+        self.Gen_Butten.clicked.connect(self.test)
+        
+        #eventFilter Setup
+        self.SRC_IP.installEventFilter(self)
+        self.DST_IP.installEventFilter(self)
+        self.SRC_Port.installEventFilter(self)
+        self.DST_Port.installEventFilter(self)
+
+    def eventFilter(self, obj, event):
+        #self.Count_Label.setText(str(event))
+        if obj == self.SRC_IP:
+            if event.type() == QEvent.MouseButtonDblClick:
+                self.SRC_IP.setText("")
+                return True
+            return False
+        elif obj == self.DST_IP:
+            if event.type() == QEvent.MouseButtonDblClick:
+                self.DST_IP.setText("")
+                return True
+            return False
+        elif obj == self.SRC_Port:
+            if event.type() == QEvent.MouseButtonDblClick:
+                self.SRC_Port.setText("")
+                return True
+            return False
+        elif obj == self.DST_Port:
+            if event.type() == QEvent.MouseButtonDblClick:
+                self.DST_Port.setText("")
+                return True
+            return False
+        else:
+            return QWidget.eventFilter(self, obj, event)
+
+    def test(self):
+        print self.SRC_IP.text()
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    main = User_MainWidget()
+    main.show()
+    sys.exit(app.exec_())
+
